@@ -4,7 +4,7 @@
   <ThingDef ParentName="MakeableDrugBase">
     <defName>Spaceacillin</defName>
     <label>Spaceacillin</label>
-    <description>A synthetic drug developed as an intense pain killer for situations requiring immunity to pain.</description>
+    <description>A very useful medicine, effective treatment for many diseases and infections. </description>
     <graphicData>
       <texPath>Things/Item/Special/Spaceacillin</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>

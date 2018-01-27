@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Emily</name>
+	<name>Medicines? Medication?</name>
 	<author>emyylii</author>
 	<targetVersion>0.18.1722</targetVersion>
 	<description>
-		test test test
+		adds a few new medical drugs to the game for those people that wanted more...
+		
+		Spaceacillin - A very useful medicine, effective treatment for many diseases and infections. 
+						
+						Metabolism: +200%
+						Immunity gain speed: +60%
+						
+		Inaprovaline - A synthetic drug developed for oxygenating the blood, significantly improves respiratory and circulatory functions.
+						
+						Blood Pumping: + 115%
+						Breathing: +110%
+		
+		Tricordrazine - A synthetic drug developed as an intense pain killer and mild stimulant.				
+						
+						Pain: x15%
+						Consciousness: +10%
+					
 	</description>
 </ModMetaData>

@@ -4,7 +4,7 @@
   <ThingDef ParentName="MakeableDrugBase">
     <defName>Inaprovaline</defName>
     <label>Inaprovaline</label>
-    <description>A synthetic drug developed for delaying death in cases where metabolism is a key factor, significantly improves metabolism as a result.</description>
+    <description>A synthetic drug developed for oxygenating the blood, significantly improves respiratory and circulatory functions.</description>
     <graphicData>
       <texPath>Things/Item/Special/Inaprovaline</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>

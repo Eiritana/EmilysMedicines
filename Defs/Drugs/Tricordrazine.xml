@@ -4,7 +4,7 @@
   <ThingDef ParentName="MakeableDrugBase">
     <defName>Tricordrazine</defName>
     <label>Tricordrazine</label>
-    <description>A synthetic drug developed as an intense pain killer for situations requiring immunity to pain.</description>
+    <description>A synthetic drug developed as an intense pain killer and mild stimulant.</description>
     <graphicData>
       <texPath>Things/Item/Special/Tricordrazine</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
