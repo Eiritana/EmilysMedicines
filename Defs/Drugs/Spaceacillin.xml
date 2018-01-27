@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MakeableDrugBase">
+    <defName>Spaceacillin</defName>
+    <label>Spaceacillin</label>
+    <description>A synthetic drug developed as an intense pain killer for situations requiring immunity to pain.</description>
+    <graphicData>
+      <texPath>Things/Item/Special/Spaceacillin</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>120</MarketValue>
+      <Mass>0.01</Mass>
+    </statBases>
+    <techLevel>Spacer</techLevel>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <foodType>Processed, Fluid</foodType>
+      <baseIngestTicks>90</baseIngestTicks>
+      <ingestSound>Ingest_Inject</ingestSound>
+      <ingestHoldOffsetStanding>
+        <northDefault>
+          <offset>(0.18,0,0)</offset>
+        </northDefault>
+      </ingestHoldOffsetStanding>
+      <ingestCommandString>Inject {0}</ingestCommandString>
+      <ingestReportString>Injecting {0}.</ingestReportString>
+      <useEatingSpeedStat>false</useEatingSpeedStat>
+      <chairSearchRadius>0</chairSearchRadius>
+      <outcomeDoers>
+
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>SpaceacillinHigh</hediffDef>
+          <severity>1.0</severity>
+          <toleranceChemical>Spaceacillin</toleranceChemical>
+        </li>
+		<li Class="IngestionOutcomeDoer_OffsetNeed">
+          <need>Rest</need>
+          <offset>1.0</offset>
+          <toleranceChemical>Spaceacillin</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>SpaceacillinTolerance</hediffDef>
+          <severity>0.044</severity>
+					<divideByBodySize>true</divideByBodySize>
+				</li>
+      </outcomeDoers>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Drug">
+        <chemical>Spaceacillin</chemical>
+        <addictiveness>0.01</addictiveness>
+        <needLevelOffset>1.00</needLevelOffset>
+        <listOrder>1010</listOrder>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  
+  
+  
+  
+  
+  <HediffDef>
+    <defName>SpaceacillinHigh</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>Effected by Spaceacillin</label>
+    <labelNoun>Spaceacillin administered</labelNoun>
+    <defaultLabelColor>(1,1,0.5)</defaultLabelColor>
+    <scenarioCanAdd>true</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+		<statOffsets>
+			<ImmunityGainSpeed>0.6</ImmunityGainSpeed>
+		</statOffsets>        
+        <capMods>
+          <li>
+            <capacity>Metabolism</capacity>
+            <offset>2.00</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  
+  
+  
+  
+  
+  
+  
+  <ThoughtDef>
+    <defName>SpaceacillinHigh</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>SpaceacillinHigh</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Effected by Spaceacillin</label>
+        <description>I feel sleepy and meh!.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  
+  
+  <!-- Go-juice addiction -->
+
+  <ChemicalDef>
+    <defName>Spaceacillin</defName>
+    <label>Spaceacillin</label>
+    <addictionHediff>SpaceacillinAddiction</addictionHediff>
+    <toleranceHediff>SpaceacillinTolerance</toleranceHediff>
+		<onGeneratedAddictedToleranceChance>0.01</onGeneratedAddictedToleranceChance>
+	</ChemicalDef>
+  
+  
+  
+  
+  
+  
+  
+  <NeedDef ParentName="DrugAddictionNeedBase">
+    <defName>Chemical_Spaceacillin</defName>
+    <needClass>Need_Chemical</needClass>
+    <label>Spaceacillin</label>
+    <description>Because of an Spaceacillin addiction, this person needs to regularly consume the drug to avoid withdrawal symptoms.</description>
+    <listPriority>45</listPriority>
+  </NeedDef>
+
+
+
+
+
+
+
+  <HediffDef ParentName="DrugToleranceBase">
+    <defName>SpaceacillinTolerance</defName>
+    <label>Spaceacillin tolerance</label>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.015</severityPerDay>
+      </li>
+      <li Class="HediffCompProperties_DrugEffectFactor">
+        <chemical>Spaceacillin</chemical>
+      </li>
+    </comps>
+		<hediffGivers>
+			<li Class="HediffGiver_RandomDrugEffect">
+				<hediff>ChemicalDamageModerate</hediff>
+				<minSeverity>0.50</minSeverity>
+				<baseMtbDays>120</baseMtbDays>
+				<partsToAffect>
+					<li>Brain</li>
+				</partsToAffect>
+			</li>
+		</hediffGivers>
+  </HediffDef>
+
+
+
+
+
+
+  <HediffDef ParentName="AddictionBase">
+    <defName>SpaceacillinAddiction</defName>
+    <hediffClass>Hediff_Addiction</hediffClass>
+    <label>Spaceacillin addiction</label>
+    <causesNeed>Chemical_Spaceacillin</causesNeed>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.04</severityPerDay>
+      </li>
+    </comps>
+    <stages>
+      <li>
+      </li>
+      <li>
+        <label>withdrawal</label>
+        <painFactor>3</painFactor>
+        <restFallFactorOffset>0.3</restFallFactorOffset>
+        <hungerRateFactorOffset>0.5</hungerRateFactorOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.20</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.50</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.20</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>-0.20</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.10</offset>
+          </li>
+        </capMods>
+        <mentalStateGivers>
+          <li>
+            <mentalState>WanderPsychotic</mentalState>
+            <mtbDays>7</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  
+  
+  
+  
+  
+  
+  <ThoughtDef>
+    <defName>SpaceacillinWithdrawal</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>SpaceacillinAddiction</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <visible>false</visible>
+      </li>
+      <li>
+        <label>Spaceacillin withdrawal</label>
+        <description>I'm all fuzzy and can't think straight. My limbs feel heavy, I'm tired and hungry, everything hurts. And why won't my eyes focus properly?</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

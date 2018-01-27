@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MakeableDrugBase">
+    <defName>Inaprovaline</defName>
+    <label>Inaprovaline</label>
+    <description>A synthetic drug developed for delaying death in cases where metabolism is a key factor, significantly improves metabolism as a result.</description>
+    <graphicData>
+      <texPath>Things/Item/Special/Inaprovaline</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <rotatable>false</rotatable>
+    <statBases>
+      <MarketValue>120</MarketValue>
+      <Mass>0.01</Mass>
+    </statBases>
+    <techLevel>Spacer</techLevel>
+    <ingestible>
+      <drugCategory>Medical</drugCategory>
+      <foodType>Processed, Fluid</foodType>
+      <baseIngestTicks>90</baseIngestTicks>
+      <ingestSound>Ingest_Inject</ingestSound>
+      <ingestHoldOffsetStanding>
+        <northDefault>
+          <offset>(0.18,0,0)</offset>
+        </northDefault>
+      </ingestHoldOffsetStanding>
+      <ingestCommandString>Inject {0}</ingestCommandString>
+      <ingestReportString>Injecting {0}.</ingestReportString>
+      <useEatingSpeedStat>false</useEatingSpeedStat>
+      <chairSearchRadius>0</chairSearchRadius>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>InaprovalineHigh</hediffDef>
+          <severity>1.0</severity>
+          <toleranceChemical>Inaprovaline</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_OffsetNeed">
+          <need>Rest</need>
+          <offset>1.0</offset>
+          <toleranceChemical>Inaprovaline</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>InaprovalineTolerance</hediffDef>
+          <severity>0.044</severity>
+					<divideByBodySize>true</divideByBodySize>
+				</li>
+      </outcomeDoers>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Drug">
+        <chemical>Inaprovaline</chemical>
+        <addictiveness>0.01</addictiveness>
+        <needLevelOffset>1.00</needLevelOffset>
+        <listOrder>1010</listOrder>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  
+  
+  
+  
+  
+  <HediffDef>
+    <defName>InaprovalineHigh</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>Effected by Inaprovaline</label>
+    <labelNoun>Inaprovaline administered</labelNoun>
+    <defaultLabelColor>(1,1,0.5)</defaultLabelColor>
+    <scenarioCanAdd>true</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>1.15</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>1.10</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  
+  
+  
+  
+  
+  
+  
+  <ThoughtDef>
+    <defName>InaprovalineHigh</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>InaprovalineHigh</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Effected by Inaprovaline</label>
+        <description>Oh my word, it's like my lungs have the power of a tornado.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  
+  
+  <!-- Go-juice addiction -->
+
+  <ChemicalDef>
+    <defName>Inaprovaline</defName>
+    <label>Inaprovaline</label>
+    <addictionHediff>InaprovalineAddiction</addictionHediff>
+    <toleranceHediff>InaprovalineTolerance</toleranceHediff>
+		<onGeneratedAddictedToleranceChance>0.01</onGeneratedAddictedToleranceChance>
+	</ChemicalDef>
+  
+  
+  
+  
+  
+  
+  
+  <NeedDef ParentName="DrugAddictionNeedBase">
+    <defName>Chemical_Inaprovaline</defName>
+    <needClass>Need_Chemical</needClass>
+    <label>Inaprovaline</label>
+    <description>Because of an Inaprovaline addiction, this person needs to regularly consume the drug to avoid withdrawal symptoms.</description>
+    <listPriority>45</listPriority>
+  </NeedDef>
+
+
+
+
+
+
+
+  <HediffDef ParentName="DrugToleranceBase">
+    <defName>InaprovalineTolerance</defName>
+    <label>Inaprovaline tolerance</label>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.015</severityPerDay>
+      </li>
+      <li Class="HediffCompProperties_DrugEffectFactor">
+        <chemical>Inaprovaline</chemical>
+      </li>
+    </comps>
+		<hediffGivers>
+			<li Class="HediffGiver_RandomDrugEffect">
+				<hediff>ChemicalDamageModerate</hediff>
+				<minSeverity>0.50</minSeverity>
+				<baseMtbDays>120</baseMtbDays>
+				<partsToAffect>
+					<li>Brain</li>
+				</partsToAffect>
+			</li>
+		</hediffGivers>
+  </HediffDef>
+
+
+
+
+
+
+  <HediffDef ParentName="AddictionBase">
+    <defName>InaprovalineAddiction</defName>
+    <hediffClass>Hediff_Addiction</hediffClass>
+    <label>Inaprovaline addiction</label>
+    <causesNeed>Chemical_Inaprovaline</causesNeed>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.04</severityPerDay>
+      </li>
+    </comps>
+    <stages>
+      <li>
+      </li>
+      <li>
+        <label>withdrawal</label>
+        <painFactor>3</painFactor>
+        <restFallFactorOffset>0.3</restFallFactorOffset>
+        <hungerRateFactorOffset>0.5</hungerRateFactorOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.20</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.50</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>-0.20</offset>
+          </li>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>-0.20</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.10</offset>
+          </li>
+        </capMods>
+        <mentalStateGivers>
+          <li>
+            <mentalState>WanderPsychotic</mentalState>
+            <mtbDays>7</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  
+  
+  
+  
+  
+  
+  <ThoughtDef>
+    <defName>InaprovalineWithdrawal</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>InaprovalineAddiction</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <visible>false</visible>
+      </li>
+      <li>
+        <label>Inaprovaline withdrawal</label>
+        <description>I'm all fuzzy and can't think straight. My limbs feel heavy, I'm tired and hungry, everything hurts. And why won't my eyes focus properly?</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>
