@@ -1,2 +1,2 @@
 # Screenshots <br />
-![Medicines](https://raw.githubusercontent.com/emyylii/EmilysMedicines/Screenshots/EmilysMedicines.jpg) <br />
+![Medicines](https://github.com/Emyylii/EmilysMedicines/raw/master/Screenshots/EmilysMedicines.jpg) <br />
